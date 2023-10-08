@@ -13,7 +13,9 @@
       in
       {
         packages = {
-          # ... (previous configuration)
+          elixir = pkgs.elixir;
+          erlang = pkgs.erlang;
+          clickhouse = pkgs.clickhouse;
         };
 
         devShell = pkgs.mkShell {
