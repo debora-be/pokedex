@@ -15,9 +15,10 @@ defmodule Pokedex.Application do
       # Start Finch
       {Finch, name: Pokedex.Finch},
       # Start the Endpoint (http/https)
-      PokedexWeb.Endpoint
+      PokedexWeb.Endpoint,
       # Start a worker by calling: Pokedex.Worker.start_link(arg)
       # {Pokedex.Worker, arg}
+      {ThousandIsland, port: 4001, handler_module: Pokedex.EchoHandler}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

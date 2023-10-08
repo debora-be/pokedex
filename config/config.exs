@@ -17,6 +17,16 @@ config :pokedex, PokedexWeb.Endpoint,
   pubsub_server: Pokedex.PubSub,
   live_view: [signing_salt: "LITxA6GA"]
 
+# Configures the database
+config :pokedex, Pokedex.Repo,
+  database: "pokedex_db",
+  hostname: "localhost",
+  port: 8123,
+  adapter: ClickhouseEcto,
+  username: "default",
+  password: "",
+  pool_size: 10
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
