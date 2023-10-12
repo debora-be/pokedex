@@ -32,23 +32,25 @@ defmodule Pokedex.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.7"},
+      {:phoenix, "~> 1.7"},
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.19.0"},
+      {:phoenix_live_view, "~> 0.18.12"},
       {:floki, ">= 0.30.0", only: :test},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 1.0"},
+      {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:tesla, "~> 1.4"},
-      {:clickhouse_ecto, "~> 0.2.8"},
-      {:thousand_island, "~> 1.0-pre"}
+      {:thousand_island, "~> 1.0-pre"},
+      {:phoenix_live_dashboard, "~> 0.7.0"},
+      {:ecto_sql, "~> 3.10"},
+      {:ecto_ch, "~> 0.3.0"}
     ]
   end
 

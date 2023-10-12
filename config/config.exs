@@ -18,14 +18,8 @@ config :pokedex, PokedexWeb.Endpoint,
   live_view: [signing_salt: "LITxA6GA"]
 
 # Configures the database
-config :pokedex, Pokedex.Repo,
-  database: "pokedex_db",
-  hostname: "localhost",
-  port: 8123,
-  adapter: ClickhouseEcto,
-  username: "default",
-  password: "",
-  pool_size: 10
+config :pokedex,
+  ecto_repos: [Pokedex.Repo]
 
 # Configures the mailer
 #

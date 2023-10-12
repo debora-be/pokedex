@@ -19,6 +19,10 @@ config :pokedex, PokedexWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
+# Configure your database
+config :pokedex, Pokedex.Repo,
+url: "http://default:@localhost:8123/default"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

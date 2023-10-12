@@ -7,6 +7,11 @@ config :pokedex, PokedexWeb.Endpoint,
   secret_key_base: "7+YsWhZ1Ch21KBjhzeb4fUCuXp5vrGKREUnLI7Y0FHRSzQVKX0a3Dpg5vsLc+COH",
   server: false
 
+config :pokedex, Pokedex.Repo,
+  adapter: Ecto.Adapters.ClickHouse,
+  database: "pplus_test",
+  show_sensitive_data_on_connection_error: true
+
 # In test we don't send emails.
 config :pokedex, Pokedex.Mailer,
   adapter: Swoosh.Adapters.Test
