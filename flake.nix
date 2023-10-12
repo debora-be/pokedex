@@ -1,39 +1,37 @@
 {
-  description = "Pokedex project with pure Elixir + ClickHouse database";
+  description = "Pokedex project Elixir/Phoenix + ClickHouse database";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
-      let
+      let 
+        inherit (pkgs.lib) optional optionals;
         pkgs = import nixpkgs { inherit system; };
-      in
+
+        inputs = with pkgs; [
+          elixir_1_15 
+          clickhouse
+          glibcLocales
+          libxml2
+          libxslt
+          xmlsec
+        ] ++ optional stdenv.isLinux [
+          inotify-tools
+        ] ++ optional stdenv.isDarwin terminal-notifier 
+        ++ optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [
+          CoreFoundation
+          CoreServices
+        ]);
+      in 
+      with pkgs;
       {
-        packages = {
-          elixir = pkgs.elixir;
-          erlang = pkgs.erlang;
-          clickhouse = pkgs.clickhouse;
-        };
-
-        devShell = pkgs.mkShell {
-          buildInputs = [ pkgs.elixir pkgs.erlang pkgs.clickhouse ];
-        };
-
-        nixosConfigurations.pokedex = pkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            {
-              services.clickhouse.enable = true;
-
-              environment.systemPackages = with pkgs; [
-                elixir erlang clickhouse
-              ];
-            }
-          ];
-        };
-      }
-    );
+        devShells.default = mkShell {
+          name = "pokedex";
+          packages = inputs;
+        }; 
+      });
 }
